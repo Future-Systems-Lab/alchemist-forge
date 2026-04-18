@@ -3,19 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlchemistForge ⛎ Shadow Integration</title>
+    <title>AlchemistForge -- Transmute Your Shadow On-Chain</title>
+    <meta name="description" content="Shadow integration meets blockchain. Name your shadow, alchemize it on-chain, and own a permanent record of your transformation on Sepolia.">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0a1f2e 0%, #0f3a4a 100%);
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #050a0f;
             color: #fff;
             min-height: 100vh;
+        }
+        a { color: #00d4ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Landing Hero */
+        .hero {
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(ellipse at 50% 30%, rgba(0,212,255,0.08) 0%, transparent 60%),
+                        linear-gradient(135deg, #050a0f 0%, #0a1f2e 50%, #0f3a4a 100%);
+            position: relative;
+        }
+        .hero-symbol {
+            font-size: 64px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 24px rgba(0,212,255,0.4));
+        }
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: #00ffff;
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
+        }
+        .hero-sub {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #aac8d8;
+            max-width: 560px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 720px;
+        }
+        .step {
+            flex: 1;
+            min-width: 180px;
+            max-width: 220px;
+            background: rgba(0,150,200,0.06);
+            border: 1px solid rgba(0,212,255,0.15);
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+        }
+        .step-num {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #00d4ff;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .step-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .step-desc {
+            font-size: 0.75rem;
+            color: #7a9ba8;
+            line-height: 1.5;
+        }
+
+        /* CTA */
+        .cta-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+        }
+        .cta-btn:hover { background: linear-gradient(135deg, #00ffff, #00bbdd); text-decoration: none; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.3); }
+
+        /* Proof strip */
+        .proof {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #7a9ba8;
+        }
+        .proof a { color: #00d4ff; font-size: 0.75rem; }
+        .proof-item { display: flex; align-items: center; gap: 6px; }
+        .proof-dot { width: 6px; height: 6px; border-radius: 50%; background: #00ff88; box-shadow: 0 0 4px #00ff88; }
+
+        /* FSL footer bar */
+        .fsl-bar {
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 0.7rem;
+            color: #555;
+            border-top: 1px solid rgba(0,212,255,0.08);
+            background: rgba(0,0,0,0.3);
+        }
+        .fsl-bar a { color: #00d4ff; font-size: 0.7rem; }
+
+        /* dApp section */
+        .dapp-section {
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px 80px;
+            background: linear-gradient(180deg, #0a1f2e 0%, #0f3a4a 100%);
         }
         .container {
             max-width: 600px;
@@ -26,105 +148,108 @@
             box-shadow: 0 8px 32px rgba(0, 200, 255, 0.15);
             border: 1px solid rgba(0, 200, 255, 0.3);
         }
-        h1 {
-            font-size: 28px;
+        .container h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
             margin-bottom: 10px;
             color: #00ffff;
         }
-        .subtitle {
-            color: #aaa;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
+        .subtitle { color: #aaa; margin-bottom: 30px; font-size: 14px; }
         .status {
             background: rgba(0, 150, 180, 0.2);
             border-left: 4px solid #00d4ff;
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            font-size: 13px;
+            padding: 12px; margin-bottom: 20px;
+            border-radius: 4px; font-size: 13px;
         }
         .status.success { border-left-color: #00ffff; color: #00ffff; }
         .status.error { border-left-color: #ff4444; color: #ff6666; }
         .status.info { border-left-color: #00d4ff; color: #00d4ff; }
-        label {
-            display: block;
-            margin-top: 20px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
+        label { display: block; margin-top: 20px; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
         textarea {
-            width: 100%;
-            padding: 12px;
+            width: 100%; padding: 12px;
             border: 1px solid rgba(0, 212, 255, 0.3);
             background: rgba(0, 150, 200, 0.08);
-            color: #fff;
-            border-radius: 6px;
+            color: #fff; border-radius: 6px;
             font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 14px;
-            resize: vertical;
-            min-height: 80px;
+            font-size: 14px; resize: vertical; min-height: 80px;
         }
-        textarea:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
-        }
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
-        }
+        textarea:focus { outline: none; border-color: #00d4ff; box-shadow: 0 0 12px rgba(0, 212, 255, 0.4); }
+        .button-group { display: flex; gap: 10px; margin-top: 25px; }
         button {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            flex: 1; padding: 12px 20px; border: none; border-radius: 6px;
+            font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
         }
-        .btn-connect {
-            background: #00d4ff;
-            color: #000;
-        }
+        .btn-connect { background: #00d4ff; color: #000; }
         .btn-connect:hover { background: #00ffff; }
-        .btn-submit {
-            background: #0099cc;
-            color: #fff;
-        }
+        .btn-submit { background: #0099cc; color: #fff; }
         .btn-submit:hover { background: #00bbdd; }
-        .btn-submit:disabled {
-            background: #666;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
+        .btn-submit:disabled { background: #666; cursor: not-allowed; opacity: 0.5; }
         .info-box {
             background: rgba(0, 150, 200, 0.15);
             border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            margin-top: 20px;
-            line-height: 1.6;
+            padding: 12px; border-radius: 6px;
+            font-size: 12px; margin-top: 20px; line-height: 1.6;
         }
         .account-info {
-            margin-top: 15px;
-            padding: 10px;
+            margin-top: 15px; padding: 10px;
             background: rgba(0, 150, 200, 0.1);
-            border-radius: 4px;
-            font-size: 12px;
-            color: #00d4ff;
+            border-radius: 4px; font-size: 12px; color: #00d4ff;
+        }
+        @media (max-width: 600px) {
+            .steps { flex-direction: column; align-items: center; }
+            .step { max-width: 100%; }
         }
     </style>
 </head>
 <body>
+
+<!-- Landing Hero -->
+<section class="hero">
+    <div class="hero-symbol">&#x26CE;</div>
+    <h1>Transmute Your Shadow</h1>
+    <p class="hero-sub">
+        Shadow integration meets blockchain. Name the darkness you carry,
+        alchemize it on-chain, and own a permanent, immutable record of your transformation.
+        Your inner work, recorded forever on Sepolia.
+    </p>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">I</div>
+            <div class="step-title">Name Your Shadow</div>
+            <div class="step-desc">Identify the shadow aspect you're ready to integrate -- fear, anger, grief, control.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">II</div>
+            <div class="step-title">Alchemize On-Chain</div>
+            <div class="step-desc">Connect your wallet and submit your transmutation to the AlchemistForge smart contract.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">III</div>
+            <div class="step-title">Celebrate Integration</div>
+            <div class="step-desc">Call celebrateEgregiously() -- your transformation is permanently recorded on Sepolia.</div>
+        </div>
+    </div>
+
+    <a href="#forge" class="cta-btn">Begin Your Transmutation</a>
+
+    <div class="proof">
+        <div class="proof-item"><span class="proof-dot"></span>Case Study #1: Dr. Meg -- Transmuted</div>
+        <div class="proof-item"><a href="https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324" target="_blank">Sepolia Contract</a></div>
+        <div class="proof-item"><a href="https://github.com/Where-Mental-Wellness-Meets-Metaverse/alchemist-forge" target="_blank">GitHub</a></div>
+    </div>
+</section>
+
+<div class="fsl-bar">
+    Part of the <a href="https://futuresystemslab.io" target="_blank">Future Systems Lab</a> sovereign wellness ecosystem -- mental-health-on-chain open source series
+</div>
+
+<!-- dApp Form -->
+<section class="dapp-section" id="forge">
     <div class="container">
-        <h1>⛎ AlchemistForge</h1>
-        <p class="subtitle">Transmute Your Shadow • Record Your Transformation</p>
-        
+        <h2>&#x26CE; The Forge</h2>
+        <p class="subtitle">Transmute your shadow -- record your transformation on-chain.</p>
+
         <div id="status" class="status info">Connect your Brave Wallet to begin.</div>
         <div id="accountInfo" class="account-info" style="display: none;"></div>
 
@@ -137,104 +262,109 @@
         </div>
 
         <div class="info-box">
-            <strong>How it works:</strong> Your shadow aspect will be permanently recorded on the Sepolia blockchain under your wallet address. You'll then be able to call `celebrateEgregiously()` to complete your integration. This is ritual + code.
+            <strong>How it works:</strong> Your shadow aspect will be permanently recorded on the Sepolia blockchain under your wallet address. You'll then be able to call <code>celebrateEgregiously()</code> to complete your integration. This is ritual + code.
         </div>
     </div>
+</section>
 
-    <script>
-        const CONTRACT_ADDRESS = '0xE092336F8f5082e57CcBb341A110C20ad186A324';
-        const CONTRACT_ABI = [
-            {
-                inputs: [{ internalType: 'string', name: '_pain', type: 'string' }],
-                name: 'alchemize',
-                outputs: [],
-                stateMutability: 'nonpayable',
-                type: 'function'
-            },
-            {
-                inputs: [],
-                name: 'celebrateEgregiously',
-                outputs: [],
-                stateMutability: 'nonpayable',
-                type: 'function'
-            },
-            {
-                inputs: [{ internalType: 'address', name: '', type: 'address' }],
-                name: 'purpose',
-                outputs: [{ internalType: 'string', name: '', type: 'string' }],
-                stateMutability: 'view',
-                type: 'function'
-            }
-        ];
+<div class="fsl-bar">
+    &#x26CE; AlchemistForge -- <a href="https://futuresystemslab.io" target="_blank">Future Systems Lab</a> -- Where Mental Wellness Meets Metaverse
+</div>
 
-        let signer = null;
-        let contract = null;
-        let userAddress = null;
-
-        async function connectWallet() {
-            try {
-                if (!window.ethereum) {
-                    updateStatus('No wallet detected. Open this page in Brave Browser.', 'error');
-                    return;
-                }
-
-                // Prefer Brave Wallet over MetaMask when both are injected
-                const eth = window.ethereum;
-                const wallet = eth.isBraveWallet ? eth
-                    : (eth.providers && eth.providers.find(p => p.isBraveWallet)) || eth;
-                const provider = new ethers.BrowserProvider(wallet);
-                const accounts = await wallet.request({ method: 'eth_requestAccounts' });
-                
-                signer = await provider.getSigner();
-                userAddress = accounts[0];
-                contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-
-                document.getElementById('submitBtn').disabled = false;
-                updateStatus(`Connected: ${userAddress.substring(0, 10)}...`, 'success');
-                document.getElementById('accountInfo').style.display = 'block';
-                document.getElementById('accountInfo').innerHTML = `<strong>Wallet:</strong> ${userAddress}<br><strong>Network:</strong> Sepolia (Chainid: 11155111)`;
-            } catch (error) {
-                updateStatus('Connection failed: ' + error.message, 'error');
-            }
+<script>
+    const CONTRACT_ADDRESS = '0xE092336F8f5082e57CcBb341A110C20ad186A324';
+    const CONTRACT_ABI = [
+        {
+            inputs: [{ internalType: 'string', name: '_pain', type: 'string' }],
+            name: 'alchemize',
+            outputs: [],
+            stateMutability: 'nonpayable',
+            type: 'function'
+        },
+        {
+            inputs: [],
+            name: 'celebrateEgregiously',
+            outputs: [],
+            stateMutability: 'nonpayable',
+            type: 'function'
+        },
+        {
+            inputs: [{ internalType: 'address', name: '', type: 'address' }],
+            name: 'purpose',
+            outputs: [{ internalType: 'string', name: '', type: 'string' }],
+            stateMutability: 'view',
+            type: 'function'
         }
+    ];
 
-        async function submitAlchemize() {
-            if (!contract || !userAddress) {
-                updateStatus('Wallet not connected', 'error');
+    let signer = null;
+    let contract = null;
+    let userAddress = null;
+
+    async function connectWallet() {
+        try {
+            if (!window.ethereum) {
+                updateStatus('No wallet detected. Open this page in Brave Browser.', 'error');
                 return;
             }
 
-            const pain = document.getElementById('shadowInput').value.trim();
-            if (!pain) {
-                updateStatus('Please enter your shadow aspect', 'error');
-                return;
-            }
+            // Prefer Brave Wallet over MetaMask when both are injected
+            const eth = window.ethereum;
+            const wallet = eth.isBraveWallet ? eth
+                : (eth.providers && eth.providers.find(p => p.isBraveWallet)) || eth;
+            const provider = new ethers.BrowserProvider(wallet);
+            const accounts = await wallet.request({ method: 'eth_requestAccounts' });
 
-            try {
-                document.getElementById('submitBtn').disabled = true;
-                updateStatus('Submitting transaction...', 'info');
+            signer = await provider.getSigner();
+            userAddress = accounts[0];
+            contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
-                const tx = await contract.alchemize(pain);
-                updateStatus(`Transaction submitted: ${tx.hash}`, 'info');
+            document.getElementById('submitBtn').disabled = false;
+            updateStatus(`Connected: ${userAddress.substring(0, 10)}...`, 'success');
+            document.getElementById('accountInfo').style.display = 'block';
+            document.getElementById('accountInfo').innerHTML = `<strong>Wallet:</strong> ${userAddress}<br><strong>Network:</strong> Sepolia (Chainid: 11155111)`;
+        } catch (error) {
+            updateStatus('Connection failed: ' + error.message, 'error');
+        }
+    }
 
-                const receipt = await tx.wait();
-                updateStatus(`✨ Transmutation complete! Block: ${receipt.blockNumber}`, 'success');
-                document.getElementById('shadowInput').value = '';
-                
-                setTimeout(() => {
-                    alert('Your shadow integration has been recorded on the blockchain!\n\nYou can now call celebrateEgregiously() via Routescan to celebrate your transformation.');
-                }, 1000);
-            } catch (error) {
-                updateStatus('Transaction failed: ' + error.message, 'error');
-                document.getElementById('submitBtn').disabled = false;
-            }
+    async function submitAlchemize() {
+        if (!contract || !userAddress) {
+            updateStatus('Wallet not connected', 'error');
+            return;
         }
 
-        function updateStatus(message, type = 'info') {
-            const statusEl = document.getElementById('status');
-            statusEl.textContent = message;
-            statusEl.className = `status ${type}`;
+        const pain = document.getElementById('shadowInput').value.trim();
+        if (!pain) {
+            updateStatus('Please enter your shadow aspect', 'error');
+            return;
         }
-    </script>
+
+        try {
+            document.getElementById('submitBtn').disabled = true;
+            updateStatus('Submitting transaction...', 'info');
+
+            const tx = await contract.alchemize(pain);
+            updateStatus(`Transaction submitted: ${tx.hash}`, 'info');
+
+            const receipt = await tx.wait();
+            updateStatus(`Transmutation complete! Block: ${receipt.blockNumber}`, 'success');
+            document.getElementById('shadowInput').value = '';
+
+            setTimeout(() => {
+                alert('Your shadow integration has been recorded on the blockchain!\n\nYou can now call celebrateEgregiously() via Etherscan to celebrate your transformation.');
+            }, 1000);
+        } catch (error) {
+            updateStatus('Transaction failed: ' + error.message, 'error');
+            document.getElementById('submitBtn').disabled = false;
+        }
+    }
+
+    function updateStatus(message, type = 'info') {
+        const statusEl = document.getElementById('status');
+        statusEl.textContent = message;
+        statusEl.className = `status ${type}`;
+    }
+</script>
 </body>
 </html>
