@@ -12,9 +12,19 @@ This isn't just therapy—it's a ritual. Your transformation is witnessed by tho
 
 ## Quick Start
 
+1. **Get Brave Browser** -- Download from [brave.com](https://brave.com/download), enable Brave Wallet in settings
+2. **Switch to Sepolia** -- Open Brave Wallet → networks → add Sepolia testnet
+3. **Get test ETH** -- Use a [Sepolia faucet](https://sepoliafaucet.com) to get free test ETH
+4. **Open AlchemistForge** -- Go to [alchemistforge.io](https://alchemistforge.io)
+5. **Connect wallet** -- Click "Connect Wallet" and approve in Brave Wallet
+6. **Name your shadow** -- Type the aspect you're integrating
+7. **Alchemize** -- Submit the transaction to record it on-chain permanently
+
 **Contract Address (Sepolia):** `0xE092336F8f5082e57CcBb341A110C20ad186A324`
 
-**Participate:** [https://testnet.routescan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324](https://testnet.routescan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324)
+**Live dApp:** [alchemistforge.io](https://alchemistforge.io)
+
+**Verify on-chain:** [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324)
 
 ## Featured
 
