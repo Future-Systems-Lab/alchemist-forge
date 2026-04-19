@@ -231,12 +231,15 @@
         </div>
     </div>
 
+    <div id="hero-counter" style="margin-bottom:32px;font-family:'Cinzel',serif;color:#00ffff;font-size:1.1rem;opacity:0.9"></div>
+
     <a href="#forge" class="cta-btn">Begin Your Transmutation</a>
 
     <div class="proof">
         <div class="proof-item"><span class="proof-dot"></span>Case Study #1: Dr. Meg -- Transmuted</div>
         <div class="proof-item"><a href="https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324" target="_blank">Sepolia Contract</a></div>
-        <div class="proof-item"><a href="https://github.com/Where-Mental-Wellness-Meets-Metaverse/alchemist-forge" target="_blank">GitHub</a></div>
+        <div class="proof-item"><a href="https://github.com/Future-Systems-Lab/alchemist-forge" target="_blank">GitHub</a></div>
+        <div class="proof-item"><a href="/analytics">Analytics</a></div>
     </div>
 </section>
 
@@ -365,6 +368,21 @@
         statusEl.textContent = message;
         statusEl.className = `status ${type}`;
     }
+
+    // Live counter — reads transmutation count from Sepolia
+    (async function loadCounter() {
+        try {
+            const rpc = new ethers.JsonRpcProvider('https://rpc.sepolia.org');
+            const c = new ethers.Contract(CONTRACT_ADDRESS, [
+                "event Transmuted(address indexed legend, string purpose)"
+            ], rpc);
+            const events = await c.queryFilter(c.filters.Transmuted(), 0, 'latest');
+            var el = document.getElementById('hero-counter');
+            if (el && events.length > 0) {
+                el.textContent = events.length + ' transformations recorded on-chain';
+            }
+        } catch (e) { /* silent fail — counter just won't show */ }
+    })();
 </script>
 </body>
 </html>

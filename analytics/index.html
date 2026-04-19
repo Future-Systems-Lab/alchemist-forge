@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlchemistForge Analytics -- On-Chain Transformation Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #050a0f; color: #fff; min-height: 100vh; }
+        a { color: #00d4ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .header { text-align: center; padding: 48px 20px 32px; }
+        .header h1 { font-family: 'Cinzel', serif; font-size: 2rem; color: #00ffff; margin-bottom: 8px; }
+        .header p { color: #7a9ba8; font-size: 0.85rem; }
+        .stats { display: flex; gap: 16px; justify-content: center; padding: 0 20px 40px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+        .stat { flex: 1; min-width: 160px; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15); border-radius: 12px; padding: 24px; text-align: center; }
+        .stat-num { font-family: 'Cinzel', serif; font-size: 2.4rem; color: #00ffff; font-weight: 700; }
+        .stat-label { font-size: 0.7rem; color: #7a9ba8; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; }
+        .section-title { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #00ffff; margin-bottom: 16px; }
+        .entry { background: rgba(0,150,200,0.06); border: 1px solid rgba(0,212,255,0.1); border-radius: 8px; padding: 16px; margin-bottom: 8px; }
+        .entry-shadow { font-size: 0.9rem; color: #e0e0e0; margin-bottom: 6px; line-height: 1.5; }
+        .entry-meta { font-size: 0.7rem; color: #556; display: flex; gap: 16px; flex-wrap: wrap; }
+        .entry-meta a { color: #00d4ff; font-size: 0.7rem; }
+        .celebrated { border-left: 3px solid #00ff88; }
+        .loading { text-align: center; padding: 40px; color: #556; }
+        .footer { text-align: center; padding: 24px; font-size: 0.7rem; color: #333; border-top: 1px solid rgba(0,212,255,0.08); }
+        .back { display: inline-block; margin-bottom: 24px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="font-size: 48px; margin-bottom: 12px;">&#x26CE;</div>
+        <h1>AlchemistForge Analytics</h1>
+        <p>Live on-chain transformation data from Sepolia</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><div class="stat-num" id="s-transmuted">--</div><div class="stat-label">Transmutations</div></div>
+        <div class="stat"><div class="stat-num" id="s-wallets">--</div><div class="stat-label">Unique Wallets</div></div>
+        <div class="stat"><div class="stat-num" id="s-celebrated">--</div><div class="stat-label">Celebrations</div></div>
+    </div>
+
+    <div class="container">
+        <a href="/" class="back">&larr; Back to AlchemistForge</a>
+        <h2 class="section-title">Shadow Aspects Recorded On-Chain</h2>
+        <div id="entries"><div class="loading">Reading from Sepolia blockchain...</div></div>
+    </div>
+
+    <div class="footer">
+        <a href="https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324" target="_blank">Contract on Sepolia Etherscan</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://futuresystemslab.io" target="_blank">Future Systems Lab</a>
+    </div>
+
+<script>
+const CONTRACT = '0xE092336F8f5082e57CcBb341A110C20ad186A324';
+const RPC = 'https://rpc.sepolia.org';
+const ABI = [
+    "event Transmuted(address indexed legend, string purpose)",
+    "event Celebrated(address indexed legend)",
+    "function purpose(address) view returns (string)"
+];
+
+async function loadAnalytics() {
+    try {
+        const provider = new ethers.JsonRpcProvider(RPC);
+        const contract = new ethers.Contract(CONTRACT, ABI, provider);
+
+        // Fetch all Transmuted events
+        const transmutedFilter = contract.filters.Transmuted();
+        const transmutedEvents = await contract.queryFilter(transmutedFilter, 0, 'latest');
+
+        // Fetch all Celebrated events
+        const celebratedFilter = contract.filters.Celebrated();
+        const celebratedEvents = await contract.queryFilter(celebratedFilter, 0, 'latest');
+
+        // Build celebrated set for marking entries
+        const celebratedAddrs = new Set(celebratedEvents.map(e => e.args[0].toLowerCase()));
+
+        // Unique wallets
+        const wallets = new Set(transmutedEvents.map(e => e.args[0].toLowerCase()));
+
+        // Update stats
+        document.getElementById('s-transmuted').textContent = transmutedEvents.length;
+        document.getElementById('s-wallets').textContent = wallets.size;
+        document.getElementById('s-celebrated').textContent = celebratedEvents.length;
+
+        // Build entries list (newest first)
+        const entries = [];
+        for (const evt of transmutedEvents) {
+            const block = await evt.getBlock();
+            entries.push({
+                address: evt.args[0],
+                shadow: evt.args[1],
+                timestamp: block.timestamp,
+                txHash: evt.transactionHash,
+                celebrated: celebratedAddrs.has(evt.args[0].toLowerCase())
+            });
+        }
+        entries.sort((a, b) => b.timestamp - a.timestamp);
+
+        const container = document.getElementById('entries');
+        if (entries.length === 0) {
+            container.innerHTML = '<div class="loading">No transmutations recorded yet. Be the first at <a href="/">alchemistforge.io</a></div>';
+            return;
+        }
+
+        container.innerHTML = entries.map(e => {
+            const date = new Date(e.timestamp * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            const short = e.address.substring(0, 8) + '...' + e.address.slice(-4);
+            const cls = e.celebrated ? 'entry celebrated' : 'entry';
+            const badge = e.celebrated ? ' <span style="color:#00ff88;font-size:0.7rem;">Celebrated</span>' : '';
+            return '<div class="' + cls + '">' +
+                '<div class="entry-shadow">"' + escapeHtml(e.shadow) + '"' + badge + '</div>' +
+                '<div class="entry-meta">' +
+                '<span>' + short + '</span>' +
+                '<span>' + date + '</span>' +
+                '<a href="https://sepolia.etherscan.io/tx/' + e.txHash + '" target="_blank">View tx</a>' +
+                '</div></div>';
+        }).join('');
+
+    } catch (err) {
+        document.getElementById('entries').innerHTML = '<div class="loading">Error reading from blockchain: ' + err.message + '</div>';
+    }
+}
+
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+loadAnalytics();
+</script>
+</body>
+</html>
