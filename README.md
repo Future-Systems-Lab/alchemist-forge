@@ -34,4 +34,61 @@ Entry 01 of the `mental-health-on-chain` public smart contract awareness series.
 
 ---
 
+## Smart Contract
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract AlchemistForge {
+
+    mapping(address => string) public purpose;
+
+    event Transmuted(address indexed legend, string purpose);
+    event Celebrated(address indexed legend);
+
+    function alchemize(string calldata _pain) external {
+        purpose[msg.sender] = _pain;
+        emit Transmuted(msg.sender, _pain);
+    }
+
+    function celebrateEgregiously() external {
+        require(bytes(purpose[msg.sender]).length > 0, "Cast your pain first.");
+        emit Celebrated(msg.sender);
+    }
+}
+```
+
+## Contract Functions
+
+### `alchemize(string _pain)`
+
+Transmute your pain into purpose. Stores your transformation on the blockchain permanently under your wallet address. Emits a `Transmuted` event.
+
+### `celebrateEgregiously()`
+
+Call this after you've integrated your shadow. Requires that you've already called `alchemize`. Emits a `Celebrated` event -- your transformation is complete and recorded forever.
+
+### `purpose(address)`
+
+View function. Returns the shadow aspect stored for any wallet address. Anyone can verify a transformation on-chain.
+
+## Deployment
+
+- **Network:** Sepolia Testnet (Chain ID: 11155111)
+- **Contract:** [`0xE092336F8f5082e57CcBb341A110C20ad186A324`](https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324)
+- **Verified source:** [Routescan](https://testnet.routescan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324/contract/11155111/code)
+
 ## Project Structure
+
+```
+alchemist-forge/
+  contracts/        # Solidity source
+  deployment/       # Sepolia deployment details
+  article/          # America Out Loud article
+  index.html        # Live dApp (alchemistforge.io)
+```
+
+## Part of FSL
+
+AlchemistForge is part of the [Future Systems Lab](https://futuresystemslab.io) sovereign wellness ecosystem -- an open source platform where mental health meets Web3.
