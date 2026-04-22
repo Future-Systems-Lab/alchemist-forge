@@ -30,7 +30,9 @@ This isn't just therapy—it's a ritual. Your transformation is witnessed by tho
 
 📰 **[Reprogram Your Limiting Beliefs on the Blockchain While Learning Web3](https://www.americaoutloud.news/reprogram-your-limiting-beliefs-on-the-blockchain-while-learning-web3/)** — *America Out Loud, April 2026*
 
-Entry 01 of the `mental-health-on-chain` public smart contract awareness series. Case Study Participant #1 — shadow aspect transmuted and celebrated on-chain.
+📰 **[Why Your Medical Record Belongs in Your Digital Wallet](https://www.americaoutloud.news/why-your-medical-record-belongs-in-your-digital-wallet/)** — *America Out Loud, April 2026*
+
+Part of the `mental-health-on-chain` public smart contract awareness series. Case Study Participant #1 — shadow aspect transmuted and celebrated on-chain.
 
 ---
 
