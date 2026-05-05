@@ -57,16 +57,35 @@
 
 <script>
 const CONTRACT = '0xE092336F8f5082e57CcBb341A110C20ad186A324';
-const RPC = 'https://rpc.sepolia.org';
+const RPC_ENDPOINTS = [
+    'https://eth-sepolia.public.blastapi.io',
+    'https://rpc.sepolia.org',
+    'https://sepolia.gateway.tenderly.co',
+    'https://ethereum-sepolia-rpc.publicnode.com'
+];
 const ABI = [
     "event Transmuted(address indexed legend, string purpose)",
     "event Celebrated(address indexed legend)",
     "function purpose(address) view returns (string)"
 ];
 
+async function getProvider() {
+    for (const rpc of RPC_ENDPOINTS) {
+        try {
+            const provider = new ethers.JsonRpcProvider(rpc);
+            await provider.getBlockNumber(); // test connectivity
+            console.log('Connected to RPC:', rpc);
+            return provider;
+        } catch (e) {
+            console.warn('RPC failed:', rpc, e.message);
+        }
+    }
+    throw new Error('All RPC endpoints unavailable');
+}
+
 async function loadAnalytics() {
     try {
-        const provider = new ethers.JsonRpcProvider(RPC);
+        const provider = await getProvider();
         const contract = new ethers.Contract(CONTRACT, ABI, provider);
 
         // Fetch all Transmuted events
