@@ -94,3 +94,4 @@ alchemist-forge/
 ## Part of FSL
 
 AlchemistForge is part of the [Future Systems Lab](https://futuresystemslab.io) sovereign wellness ecosystem -- an open source platform where mental health meets Web3.
+<!-- vercel-reconnect-test Thu May  7 10:26:41 UTC 2026 -->
