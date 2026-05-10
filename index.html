@@ -32,11 +32,15 @@
     .ecosystem-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid rgba(30,45,61,0.3); text-decoration: none; transition: background 0.15s ease; }
     .ecosystem-item:last-child { border-bottom: none; border-radius: 0 0 12px 12px; }
     .ecosystem-item:hover { background: #1a2332; }
-    .chevron-rotate { transition: transform 0.2s ease; } .chevron-rotate.open { transform: rotate(180deg); }
+    .chevron-rotate { transition: transform 0.2s ease; }
+    .chevron-rotate.open { transform: rotate(180deg); }
     .dropdown-card { position: absolute; top: 100%; left: 0; margin-top: 8px; width: 288px; background: #131b2a; border: 1px solid #1e2d3d; border-radius: 12px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); z-index: 50; overflow: hidden; }
     .stat-card { background: #131b2a; border: 1px solid #1e2d3d; border-radius: 12px; padding: 20px; text-align: center; }
     .glow-text { background: linear-gradient(90deg, #00d4ff, #c084fc, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .overlay { position: fixed; inset: 0; z-index: 40; }
+    .tab-active { color: #00d4ff; border-bottom: 2px solid #00d4ff; }
+    .tab-inactive { color: #6b7280; border-bottom: 2px solid transparent; }
+    .tab-inactive:hover { color: #d1d5db; }
   </style>
 </head>
 <body>
@@ -50,7 +54,7 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
       <div style="position: relative;">
         <button id="brandBtn" style="display: flex; align-items: center; gap: 10px; cursor: pointer; border-radius: 8px; padding: 4px 8px; margin-left: -8px; background: none; border: none; color: inherit;" class="hover:bg-af-card-hover/60">
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><defs><radialGradient id="b" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ff8af5"/><stop offset="50%" stop-color="#c255e8"/><stop offset="100%" stop-color="#7b2cbf"/></radialGradient><radialGradient id="s" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#b8860b"/></radialGradient></defs><ellipse cx="16" cy="27" rx="8" ry="3" fill="url(#s)" opacity="0.9"/><rect x="13" y="24" width="6" height="3" rx="1" fill="url(#s)" opacity="0.8"/><circle cx="16" cy="14" r="10" fill="url(#b)"/><ellipse cx="13" cy="10" rx="3" ry="2.5" fill="white" opacity="0.35"/><circle cx="19" cy="17" r="1.5" fill="white" opacity="0.2"/></svg>
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><defs><radialGradient id="bg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ff8af5"/><stop offset="50%" stop-color="#c255e8"/><stop offset="100%" stop-color="#7b2cbf"/></radialGradient><radialGradient id="sg" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#b8860b"/></radialGradient></defs><ellipse cx="16" cy="27" rx="8" ry="3" fill="url(#sg)" opacity="0.9"/><rect x="13" y="24" width="6" height="3" rx="1" fill="url(#sg)" opacity="0.8"/><circle cx="16" cy="14" r="10" fill="url(#bg)"/><ellipse cx="13" cy="10" rx="3" ry="2.5" fill="white" opacity="0.35"/><circle cx="19" cy="17" r="1.5" fill="white" opacity="0.2"/></svg>
           <span class="text-lg font-bold text-gray-100 tracking-tight">AlchemistForge</span>
           <svg id="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-rotate text-gray-400"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -62,6 +66,13 @@
         </div>
       </div>
       <button id="walletBtn" class="btn-cyan px-5 py-2 rounded-lg text-sm font-semibold">Connect EVM Wallet</button>
+    </div>
+  </div>
+  <div class="bg-af-bg border-b border-af-border/40">
+    <div class="max-w-7xl mx-auto flex items-center gap-1 px-4">
+      <a href="https://alchemistforge.io" class="flex items-center gap-2 px-4 py-3 text-sm font-medium tab-active" style="text-decoration: none;">&#x1F52E; The Forge</a>
+      <a href="https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324" target="_blank" class="flex items-center gap-2 px-4 py-3 text-sm font-medium tab-inactive" style="text-decoration: none;">&#x26D3;&#xFE0F; Contract</a>
+      <a href="https://github.com/Future-Systems-Lab/alchemist-forge" target="_blank" class="flex items-center gap-2 px-4 py-3 text-sm font-medium tab-inactive" style="text-decoration: none;">&#x2699;&#xFE0F; Settings</a>
     </div>
   </div>
 </header>
@@ -96,7 +107,7 @@
 </footer>
 
 <script>
-const cryptoData = [
+var cryptoData = [
   { s: 'XRP', p: '$1.44', c: '2.1', up: true }, { s: 'XLM', p: '$0.1674', c: '3.4', up: true },
   { s: 'HBAR', p: '$0.0959', c: '4.1', up: true }, { s: 'ALGO', p: '$0.1292', c: '-0.2', up: false },
   { s: 'ADA', p: '$0.2813', c: '4.2', up: true }, { s: 'ETH', p: '$2,348.54', c: '1.4', up: true },
