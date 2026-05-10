@@ -200,8 +200,16 @@
             .step { max-width: 100%; }
         }
     </style>
+<style>.fsl-ticker{position:fixed;top:0;left:0;width:100%;height:36px;background:#0a0a0a;border-bottom:1px solid #00D9FF15;overflow:hidden;z-index:50;font-family:"Inter",system-ui,sans-serif;font-size:0.7rem;letter-spacing:0.04em;color:#00D9FF;line-height:36px;white-space:nowrap}.fsl-ticker-inner{display:inline-block;animation:tickerScroll 50s linear infinite}@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}</style><style>
+.fsl-ticker{position:fixed;top:0;left:0;width:100%;height:36px;background:#0a0a0a;border-bottom:1px solid rgba(0,217,255,0.15);overflow:hidden;z-index:50;font-family:"Inter",system-ui,sans-serif;font-size:0.7rem;letter-spacing:0.04em;line-height:36px;white-space:nowrap}
+.fsl-ticker-inner{display:inline-block;animation:tickerScroll 50s linear infinite}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+body{padding-top:36px}
+</style>
 </head>
 <body>
+<div class="fsl-ticker"><div class="fsl-ticker-inner" id="af-ticker"></div></div>
+<script src="ticker.js"></script>
 
 <!-- Landing Hero -->
 <section class="hero">
