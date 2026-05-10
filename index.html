@@ -210,7 +210,52 @@ body{padding-top:100px}
 <body>
 <div class="fsl-ticker"><div class="fsl-ticker-inner" id="af-ticker"></div></div>
 <script src="ticker.js"></script>
-<header style="position:fixed;top:36px;left:0;right:0;z-index:40;height:64px;border-bottom:1px solid rgba(255,255,255,0.06);background:#0a0a0a;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:1.5rem">🔮</span><span style="font-size:1.125rem;font-weight:600;letter-spacing:0.025em;color:#00D9FF">AlchemistForge</span></div><div class="ecosystem-switcher"><button class="ecosystem-btn">&#x25BC; Ecosystem</button><div class="ecosystem-dropdown"><a href="https://encrypthealth.io" class="ecosystem-item"><span class="ecosystem-icon">&#x1F9EC;</span>EncryptHealth</a><a href="https://hypnoneuro.io" class="ecosystem-item"><span class="ecosystem-icon">&#x1F3AE;</span>HypnoNeuro</a><a href="https://sovereignledger.io" class="ecosystem-item"><span class="ecosystem-icon">&#x2696;&#xFE0F;</span>SovereignLedger</a><a href="https://alchemistforge.io" class="ecosystem-item" style="color:#00D9FF"><span class="ecosystem-icon">&#x1F52E;</span>AlchemistForge</a><a href="https://fsl-command-center.vercel.app" class="ecosystem-item"><span class="ecosystem-icon">&#x26CE;</span>Command Center</a></div></div></header>
+<!-- FSL Unified Header -->
+<style>
+.fsl-header{position:sticky;top:0;z-index:100;height:64px;border-bottom:1px solid rgba(0,217,255,0.1);background:#0a0a0a;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.fsl-header-left{display:flex;align-items:center;gap:12px}
+.fsl-logo{font-size:24px;text-decoration:none}
+.fsl-brand{display:flex;flex-direction:column}
+.fsl-brand-name{font-size:18px;font-weight:700;color:#00D9FF;letter-spacing:-0.02em}
+.fsl-brand-tagline{font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#00D9FF;opacity:0.7;margin-top:2px}
+.fsl-header-right{display:flex;align-items:center;gap:16px}
+.fsl-ecosystem{position:relative}
+.fsl-ecosystem-btn{background:none;border:none;color:#9CA3AF;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:6px;transition:all 200ms}
+.fsl-ecosystem-btn:hover{color:#00D9FF;background:rgba(255,255,255,0.05)}
+.fsl-ecosystem-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#0a0a0a;border:1px solid rgba(0,217,255,0.2);border-radius:12px;padding:8px;min-width:220px;z-index:200;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.fsl-ecosystem:hover .fsl-ecosystem-dropdown{display:block}
+.fsl-ecosystem-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;color:#9CA3AF;font-size:14px;transition:all 150ms}
+.fsl-ecosystem-item:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.fsl-ecosystem-item.active{color:#00D9FF;background:rgba(0,217,255,0.08)}
+.fsl-ecosystem-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05);border-radius:8px;font-size:16px}
+.fsl-wallet-btn{padding:8px 16px;font-size:14px;font-weight:600;border-radius:8px;background:#00D9FF;color:#0a0a0a;border:none;cursor:pointer;transition:all 200ms}
+.fsl-wallet-btn:hover{background:#00f0ff;transform:translateY(-1px)}
+</style>
+
+<header class="fsl-header">
+  <div class="fsl-header-left">
+    <a href="/" class="fsl-logo">🔮</a>
+    <div class="fsl-brand">
+      <span class="fsl-brand-name">AlchemistForge</span>
+      <span class="fsl-brand-tagline">Sovereignty by Design</span>
+    </div>
+  </div>
+  <div class="fsl-header-right">
+    <div class="fsl-ecosystem">
+      <button class="fsl-ecosystem-btn">▼ Ecosystem</button>
+      <div class="fsl-ecosystem-dropdown">
+        <a href="https://encrypthealth.io" class="fsl-ecosystem-item"><span class="fsl-ecosystem-icon">🧬</span>EncryptHealth</a>
+        <a href="https://hypnoneuro.io" class="fsl-ecosystem-item"><span class="fsl-ecosystem-icon">🎮</span>HypnoNeuro</a>
+        <a href="https://sovereignledger.io" class="fsl-ecosystem-item"><span class="fsl-ecosystem-icon">⚖️</span>SovereignLedger</a>
+        <a href="https://alchemistforge.io" class="fsl-ecosystem-item active"><span class="fsl-ecosystem-icon">🔮</span>AlchemistForge</a>
+        <a href="https://fsl-command-center.vercel.app" class="fsl-ecosystem-item"><span class="fsl-ecosystem-icon">⛎</span>Command Center</a>
+      </div>
+    </div>
+    <button class="fsl-wallet-btn" id="headerWalletBtn">Connect EVM Wallet</button>
+  </div>
+</header>
+
+
 
 <!-- Landing Hero -->
 <section class="hero">
