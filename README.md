@@ -1,5 +1,7 @@
 # AlchemistForge ⛎🔥
 
+Patent Pending — U.S. Provisional Application No. 64/063,037 (filed May 2026)
+
 **Transmuting pain into purpose on the blockchain**
 
 A smart contract that combines digital psychology with blockchain technology—helping you reprogram limiting beliefs while learning cryptocurrency through something deeply meaningful.
