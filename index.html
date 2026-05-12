@@ -9,6 +9,7 @@ function fireBurst(){
   var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
   var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
   var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  // Standard zodiac + stars burst
   for(var i=0;i<40;i++){
     var el=document.createElement('div');
     el.className='burst-particle';
@@ -28,6 +29,28 @@ function fireBurst(){
     document.body.appendChild(el);
     (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
   }
+  // Ophiuchus — the 13th, the suppressed serpent-bearer
+  var oph=document.createElement('div');
+  oph.className='ophiuchus-traveler';
+  oph.textContent='\u26CE';
+  document.body.appendChild(oph);
+  setTimeout(function(){oph.remove();},4000);
+  // Ophiuchus trailing glow particles
+  var trailColors=['#c084fc','#ffd700','#ff8af5','#00d4ff'];
+  var trailCount=0;
+  var trailInterval=setInterval(function(){
+    if(trailCount>30){clearInterval(trailInterval);return;}
+    var rect=oph.getBoundingClientRect();
+    if(rect.left<-200||rect.left>window.innerWidth+200){trailCount++;return;}
+    var dot=document.createElement('div');
+    dot.className='oph-trail';
+    var tcol=trailColors[Math.floor(Math.random()*trailColors.length)];
+    var tsize=4+Math.random()*8;
+    dot.style.cssText='left:'+(rect.left+rect.width/2)+'px;top:'+(rect.top+rect.height/2+(Math.random()-0.5)*20)+'px;width:'+tsize+'px;height:'+tsize+'px;background:'+tcol+';box-shadow:0 0 '+tsize+'px '+tcol;
+    document.body.appendChild(dot);
+    setTimeout(function(){dot.remove();},1500);
+    trailCount++;
+  },80);
 }
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
@@ -47,6 +70,7 @@ function fireBurst(){
   var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
   var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
   var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  // Standard zodiac + stars burst
   for(var i=0;i<40;i++){
     var el=document.createElement('div');
     el.className='burst-particle';
@@ -66,6 +90,28 @@ function fireBurst(){
     document.body.appendChild(el);
     (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
   }
+  // Ophiuchus — the 13th, the suppressed serpent-bearer
+  var oph=document.createElement('div');
+  oph.className='ophiuchus-traveler';
+  oph.textContent='\u26CE';
+  document.body.appendChild(oph);
+  setTimeout(function(){oph.remove();},4000);
+  // Ophiuchus trailing glow particles
+  var trailColors=['#c084fc','#ffd700','#ff8af5','#00d4ff'];
+  var trailCount=0;
+  var trailInterval=setInterval(function(){
+    if(trailCount>30){clearInterval(trailInterval);return;}
+    var rect=oph.getBoundingClientRect();
+    if(rect.left<-200||rect.left>window.innerWidth+200){trailCount++;return;}
+    var dot=document.createElement('div');
+    dot.className='oph-trail';
+    var tcol=trailColors[Math.floor(Math.random()*trailColors.length)];
+    var tsize=4+Math.random()*8;
+    dot.style.cssText='left:'+(rect.left+rect.width/2)+'px;top:'+(rect.top+rect.height/2+(Math.random()-0.5)*20)+'px;width:'+tsize+'px;height:'+tsize+'px;background:'+tcol+';box-shadow:0 0 '+tsize+'px '+tcol;
+    document.body.appendChild(dot);
+    setTimeout(function(){dot.remove();},1500);
+    trailCount++;
+  },80);
 }
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
@@ -97,6 +143,7 @@ function fireBurst(){
   var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
   var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
   var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  // Standard zodiac + stars burst
   for(var i=0;i<40;i++){
     var el=document.createElement('div');
     el.className='burst-particle';
@@ -116,6 +163,28 @@ function fireBurst(){
     document.body.appendChild(el);
     (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
   }
+  // Ophiuchus — the 13th, the suppressed serpent-bearer
+  var oph=document.createElement('div');
+  oph.className='ophiuchus-traveler';
+  oph.textContent='\u26CE';
+  document.body.appendChild(oph);
+  setTimeout(function(){oph.remove();},4000);
+  // Ophiuchus trailing glow particles
+  var trailColors=['#c084fc','#ffd700','#ff8af5','#00d4ff'];
+  var trailCount=0;
+  var trailInterval=setInterval(function(){
+    if(trailCount>30){clearInterval(trailInterval);return;}
+    var rect=oph.getBoundingClientRect();
+    if(rect.left<-200||rect.left>window.innerWidth+200){trailCount++;return;}
+    var dot=document.createElement('div');
+    dot.className='oph-trail';
+    var tcol=trailColors[Math.floor(Math.random()*trailColors.length)];
+    var tsize=4+Math.random()*8;
+    dot.style.cssText='left:'+(rect.left+rect.width/2)+'px;top:'+(rect.top+rect.height/2+(Math.random()-0.5)*20)+'px;width:'+tsize+'px;height:'+tsize+'px;background:'+tcol+';box-shadow:0 0 '+tsize+'px '+tcol;
+    document.body.appendChild(dot);
+    setTimeout(function(){dot.remove();},1500);
+    trailCount++;
+  },80);
 }
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
@@ -145,6 +214,39 @@ function dismissCelebration(){
   15% { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot)); }
   60% { opacity: 0.8; }
   100% { transform: translate(var(--dx2), calc(var(--dy2) + 120px)) scale(0.3) rotate(calc(var(--rot) * 2)); opacity: 0; }
+}
+
+.ophiuchus-traveler {
+  position: fixed;
+  z-index: 1002;
+  pointer-events: none;
+  font-size: 96px;
+  opacity: 0;
+  filter: drop-shadow(0 0 12px #c084fc) drop-shadow(0 0 30px #ffd700);
+  animation: ophArc 3s 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+@keyframes ophArc {
+  0% { left: -120px; top: 60%; opacity: 0; transform: scale(0.5) rotate(-20deg); }
+  15% { opacity: 1; transform: scale(1) rotate(-10deg); }
+  45% { top: 35%; transform: scale(1.3) rotate(0deg); filter: drop-shadow(0 0 24px #c084fc) drop-shadow(0 0 50px #ffd700) drop-shadow(0 0 80px rgba(192,132,252,0.4)); }
+  50% { left: 50%; top: 33%; transform: scale(1.4) rotate(0deg); }
+  55% { top: 35%; transform: scale(1.3) rotate(5deg); }
+  85% { opacity: 1; transform: scale(1) rotate(15deg); }
+  100% { left: calc(100% + 120px); top: 55%; opacity: 0; transform: scale(0.6) rotate(25deg); }
+}
+.oph-trail {
+  position: fixed;
+  z-index: 1001;
+  pointer-events: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: trailFade 1.2s ease-out forwards;
+}
+@keyframes trailFade {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.1); }
 }
 </style>
 </head>
@@ -296,6 +398,7 @@ function fireBurst(){
   var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
   var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
   var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  // Standard zodiac + stars burst
   for(var i=0;i<40;i++){
     var el=document.createElement('div');
     el.className='burst-particle';
@@ -315,6 +418,28 @@ function fireBurst(){
     document.body.appendChild(el);
     (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
   }
+  // Ophiuchus — the 13th, the suppressed serpent-bearer
+  var oph=document.createElement('div');
+  oph.className='ophiuchus-traveler';
+  oph.textContent='\u26CE';
+  document.body.appendChild(oph);
+  setTimeout(function(){oph.remove();},4000);
+  // Ophiuchus trailing glow particles
+  var trailColors=['#c084fc','#ffd700','#ff8af5','#00d4ff'];
+  var trailCount=0;
+  var trailInterval=setInterval(function(){
+    if(trailCount>30){clearInterval(trailInterval);return;}
+    var rect=oph.getBoundingClientRect();
+    if(rect.left<-200||rect.left>window.innerWidth+200){trailCount++;return;}
+    var dot=document.createElement('div');
+    dot.className='oph-trail';
+    var tcol=trailColors[Math.floor(Math.random()*trailColors.length)];
+    var tsize=4+Math.random()*8;
+    dot.style.cssText='left:'+(rect.left+rect.width/2)+'px;top:'+(rect.top+rect.height/2+(Math.random()-0.5)*20)+'px;width:'+tsize+'px;height:'+tsize+'px;background:'+tcol+';box-shadow:0 0 '+tsize+'px '+tcol;
+    document.body.appendChild(dot);
+    setTimeout(function(){dot.remove();},1500);
+    trailCount++;
+  },80);
 }
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
