@@ -5,10 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🔮 AlchemistForge</title>
   <script src="https://cdn.tailwindcss.com">
+function fireBurst(){
+  var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
+  var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
+  var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  for(var i=0;i<40;i++){
+    var el=document.createElement('div');
+    el.className='burst-particle';
+    el.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
+    var angle=Math.random()*Math.PI*2;
+    var dist=80+Math.random()*200;
+    var dist2=dist+60+Math.random()*100;
+    var dx=Math.cos(angle)*dist;
+    var dy=Math.sin(angle)*dist;
+    var dx2=Math.cos(angle)*dist2;
+    var dy2=Math.sin(angle)*dist2;
+    var rot=(Math.random()-0.5)*360;
+    var dur=2+Math.random()*2;
+    var delay=Math.random()*0.5;
+    var size=16+Math.random()*20;
+    el.style.cssText='left:'+cx+'px;top:'+cy+'px;font-size:'+size+'px;--dx:'+dx+'px;--dy:'+dy+'px;--dx2:'+dx2+'px;--dy2:'+dy2+'px;--rot:'+rot+'deg;--dur:'+dur+'s;--delay:'+delay+'s;color:'+colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(el);
+    (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
+  }
+}
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
   var walletEl=document.getElementById('celebWallet');
-  if(overlay){overlay.style.display='flex';}
+  if(overlay){overlay.style.display='flex';fireBurst();}
   if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
   window._pendingTxHash=txHash;
 }
@@ -19,10 +43,34 @@ function dismissCelebration(){
 }
 </script>
   <script>tailwind.config={theme:{extend:{colors:{'af-bg':'#0a0e1a','af-bg-light':'#0d1117','af-card':'#131b2a','af-card-hover':'#1a2332','af-border':'#1e2d3d','af-cyan':'#00d4ff'}}}}
+function fireBurst(){
+  var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
+  var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
+  var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  for(var i=0;i<40;i++){
+    var el=document.createElement('div');
+    el.className='burst-particle';
+    el.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
+    var angle=Math.random()*Math.PI*2;
+    var dist=80+Math.random()*200;
+    var dist2=dist+60+Math.random()*100;
+    var dx=Math.cos(angle)*dist;
+    var dy=Math.sin(angle)*dist;
+    var dx2=Math.cos(angle)*dist2;
+    var dy2=Math.sin(angle)*dist2;
+    var rot=(Math.random()-0.5)*360;
+    var dur=2+Math.random()*2;
+    var delay=Math.random()*0.5;
+    var size=16+Math.random()*20;
+    el.style.cssText='left:'+cx+'px;top:'+cy+'px;font-size:'+size+'px;--dx:'+dx+'px;--dy:'+dy+'px;--dx2:'+dx2+'px;--dy2:'+dy2+'px;--rot:'+rot+'deg;--dur:'+dur+'s;--delay:'+delay+'s;color:'+colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(el);
+    (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
+  }
+}
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
   var walletEl=document.getElementById('celebWallet');
-  if(overlay){overlay.style.display='flex';}
+  if(overlay){overlay.style.display='flex';fireBurst();}
   if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
   window._pendingTxHash=txHash;
 }
@@ -45,10 +93,34 @@ function dismissCelebration(){
     .overlay{position:fixed;inset:0;z-index:40}
   </style>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&display=swap" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js">
+function fireBurst(){
+  var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
+  var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
+  var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  for(var i=0;i<40;i++){
+    var el=document.createElement('div');
+    el.className='burst-particle';
+    el.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
+    var angle=Math.random()*Math.PI*2;
+    var dist=80+Math.random()*200;
+    var dist2=dist+60+Math.random()*100;
+    var dx=Math.cos(angle)*dist;
+    var dy=Math.sin(angle)*dist;
+    var dx2=Math.cos(angle)*dist2;
+    var dy2=Math.sin(angle)*dist2;
+    var rot=(Math.random()-0.5)*360;
+    var dur=2+Math.random()*2;
+    var delay=Math.random()*0.5;
+    var size=16+Math.random()*20;
+    el.style.cssText='left:'+cx+'px;top:'+cy+'px;font-size:'+size+'px;--dx:'+dx+'px;--dy:'+dy+'px;--dx2:'+dx2+'px;--dy2:'+dy2+'px;--rot:'+rot+'deg;--dur:'+dur+'s;--delay:'+delay+'s;color:'+colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(el);
+    (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
+  }
+}
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
   var walletEl=document.getElementById('celebWallet');
-  if(overlay){overlay.style.display='flex';}
+  if(overlay){overlay.style.display='flex';fireBurst();}
   if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
   window._pendingTxHash=txHash;
 }
@@ -58,6 +130,23 @@ function dismissCelebration(){
   if(window._pendingTxHash)showVerifySection(window._pendingTxHash);
 }
 </script>
+
+<style>
+.burst-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1001;
+  font-size: 24px;
+  opacity: 0;
+  animation: burstOut var(--dur) var(--delay) ease-out forwards;
+}
+@keyframes burstOut {
+  0% { transform: translate(0,0) scale(0) rotate(0deg); opacity: 0; }
+  15% { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot)); }
+  60% { opacity: 0.8; }
+  100% { transform: translate(var(--dx2), calc(var(--dy2) + 120px)) scale(0.3) rotate(calc(var(--rot) * 2)); opacity: 0; }
+}
+</style>
 </head>
 <body>
 <div class="w-full bg-black/60 border-b border-af-border/50 overflow-hidden py-1.5"><div class="marquee-track flex whitespace-nowrap" id="ticker" style="width:max-content;"></div></div>
@@ -203,10 +292,34 @@ function showVerifySection(txHash){
   section.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
+function fireBurst(){
+  var glyphs=['\u2648','\u2649','\u264A','\u264B','\u264C','\u264D','\u264E','\u264F','\u2650','\u2651','\u2652','\u2653','\u2728','\u2B50','\uD83C\uDF1F','\uD83D\uDCAB','\u2728','\u2728','\u2B50','\uD83C\uDF1F'];
+  var colors=['#c084fc','#00d4ff','#ffd700','#ff8af5','#22c55e','#f472b6'];
+  var cx=window.innerWidth/2;var cy=window.innerHeight/2;
+  for(var i=0;i<40;i++){
+    var el=document.createElement('div');
+    el.className='burst-particle';
+    el.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
+    var angle=Math.random()*Math.PI*2;
+    var dist=80+Math.random()*200;
+    var dist2=dist+60+Math.random()*100;
+    var dx=Math.cos(angle)*dist;
+    var dy=Math.sin(angle)*dist;
+    var dx2=Math.cos(angle)*dist2;
+    var dy2=Math.sin(angle)*dist2;
+    var rot=(Math.random()-0.5)*360;
+    var dur=2+Math.random()*2;
+    var delay=Math.random()*0.5;
+    var size=16+Math.random()*20;
+    el.style.cssText='left:'+cx+'px;top:'+cy+'px;font-size:'+size+'px;--dx:'+dx+'px;--dy:'+dy+'px;--dx2:'+dx2+'px;--dy2:'+dy2+'px;--rot:'+rot+'deg;--dur:'+dur+'s;--delay:'+delay+'s;color:'+colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(el);
+    (function(e,t){setTimeout(function(){e.remove();},t);})(el,(dur+delay+0.5)*1000);
+  }
+}
 function showCelebration(txHash){
   var overlay=document.getElementById('celebrationOverlay');
   var walletEl=document.getElementById('celebWallet');
-  if(overlay){overlay.style.display='flex';}
+  if(overlay){overlay.style.display='flex';fireBurst();}
   if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
   window._pendingTxHash=txHash;
 }
