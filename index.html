@@ -4,8 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🔮 AlchemistForge</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{'af-bg':'#0a0e1a','af-bg-light':'#0d1117','af-card':'#131b2a','af-card-hover':'#1a2332','af-border':'#1e2d3d','af-cyan':'#00d4ff'}}}}</script>
+  <script src="https://cdn.tailwindcss.com">
+function showCelebration(txHash){
+  var overlay=document.getElementById('celebrationOverlay');
+  var walletEl=document.getElementById('celebWallet');
+  if(overlay){overlay.style.display='flex';}
+  if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
+  window._pendingTxHash=txHash;
+}
+function dismissCelebration(){
+  var overlay=document.getElementById('celebrationOverlay');
+  if(overlay)overlay.style.display='none';
+  if(window._pendingTxHash)showVerifySection(window._pendingTxHash);
+}
+</script>
+  <script>tailwind.config={theme:{extend:{colors:{'af-bg':'#0a0e1a','af-bg-light':'#0d1117','af-card':'#131b2a','af-card-hover':'#1a2332','af-border':'#1e2d3d','af-cyan':'#00d4ff'}}}}
+function showCelebration(txHash){
+  var overlay=document.getElementById('celebrationOverlay');
+  var walletEl=document.getElementById('celebWallet');
+  if(overlay){overlay.style.display='flex';}
+  if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
+  window._pendingTxHash=txHash;
+}
+function dismissCelebration(){
+  var overlay=document.getElementById('celebrationOverlay');
+  if(overlay)overlay.style.display='none';
+  if(window._pendingTxHash)showVerifySection(window._pendingTxHash);
+}
+</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Chakra Petch:wght@300;400;500;600;700&display=swap');
     *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Chakra Petch',system-ui,sans-serif;background:#0a0e1a;color:#fff}
@@ -18,14 +44,44 @@
     .glow-text{background:linear-gradient(90deg,#00d4ff,#c084fc,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .overlay{position:fixed;inset:0;z-index:40}
   </style>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&display=swap" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&display=swap" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js">
+function showCelebration(txHash){
+  var overlay=document.getElementById('celebrationOverlay');
+  var walletEl=document.getElementById('celebWallet');
+  if(overlay){overlay.style.display='flex';}
+  if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
+  window._pendingTxHash=txHash;
+}
+function dismissCelebration(){
+  var overlay=document.getElementById('celebrationOverlay');
+  if(overlay)overlay.style.display='none';
+  if(window._pendingTxHash)showVerifySection(window._pendingTxHash);
+}
+</script>
 </head>
 <body>
 <div class="w-full bg-black/60 border-b border-af-border/50 overflow-hidden py-1.5"><div class="marquee-track flex whitespace-nowrap" id="ticker" style="width:max-content;"></div></div>
 <header class="w-full sticky top-0 z-50"><div class="bg-af-bg-light/95 backdrop-blur-md border-b border-af-border/60"><div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3"><div style="position:relative;"><button id="brandBtn" style="display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:8px;padding:4px 8px;margin-left:-8px;background:none;border:none;color:inherit;" class="hover:bg-af-card-hover/60"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><defs><radialGradient id="bg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ff8af5"/><stop offset="50%" stop-color="#c255e8"/><stop offset="100%" stop-color="#7b2cbf"/></radialGradient><radialGradient id="sg" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#b8860b"/></radialGradient></defs><ellipse cx="16" cy="27" rx="8" ry="3" fill="url(#sg)" opacity="0.9"/><rect x="13" y="24" width="6" height="3" rx="1" fill="url(#sg)" opacity="0.8"/><circle cx="16" cy="14" r="10" fill="url(#bg)"/><ellipse cx="13" cy="10" rx="3" ry="2.5" fill="white" opacity="0.35"/><circle cx="19" cy="17" r="1.5" fill="white" opacity="0.2"/></svg><span class="text-lg font-bold text-gray-100 tracking-tight">AlchemistForge</span><svg id="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="chevron-rotate text-gray-400"><polyline points="6 9 12 15 18 9"/></svg></button><div id="ecoDropdown" class="dropdown-card" style="display:none;"><div style="padding:10px 16px;border-bottom:1px solid rgba(30,45,61,.6);"><p style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#6b7280;font-weight:500;">FSL Ecosystem</p></div><a href="https://encrypthealth.io" target="_blank" class="ecosystem-item"><span style="font-size:18px;">&#x1F9EC;</span><div style="flex:1;"><p style="font-size:14px;font-weight:500;color:#e5e7eb;">EncryptHealth</p><p style="font-size:11px;color:#6b7280;">Sovereign Health Records</p></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a href="https://hypnoneuro.io" target="_blank" class="ecosystem-item"><span style="font-size:18px;">&#x1F3AE;</span><div style="flex:1;"><p style="font-size:14px;font-weight:500;color:#e5e7eb;">HypnoNeuro</p><p style="font-size:11px;color:#6b7280;">Neuroplasticity Gaming</p></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a href="https://sovereignledger.io" target="_blank" class="ecosystem-item"><span style="font-size:18px;">&#x2696;&#xFE0F;</span><div style="flex:1;"><p style="font-size:14px;font-weight:500;color:#e5e7eb;">SovereignLedger</p><p style="font-size:11px;color:#6b7280;">Decentralized Legal</p></div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div></div><span id="walletStatus" style="font-size:11px;color:#9ca3af;font-family:monospace;"></span></div></div></header>
-<section class="relative flex flex-col items-center justify-center text-center px-4 py-20" style="min-height:60vh;"><div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 50% 40% at 50% 30%,rgba(0,212,255,.06) 0%,transparent 70%);"></div><div class="relative z-10"><div class="mx-auto mb-6" style="width:96px;height:96px;"><svg width="96" height="96" viewBox="0 0 32 32" fill="none"><defs><radialGradient id="hb" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ff8af5"/><stop offset="50%" stop-color="#c255e8"/><stop offset="100%" stop-color="#7b2cbf"/></radialGradient><radialGradient id="hs" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#b8860b"/></radialGradient></defs><ellipse cx="16" cy="27" rx="8" ry="3" fill="url(#hs)" opacity="0.9"/><rect x="13" y="24" width="6" height="3" rx="1" fill="url(#hs)" opacity="0.8"/><circle cx="16" cy="14" r="10" fill="url(#hb)"/><ellipse cx="13" cy="10" rx="3" ry="2.5" fill="white" opacity="0.35"/><circle cx="19" cy="17" r="1.5" fill="white" opacity="0.2"/><circle cx="16" cy="14" r="10.5" stroke="rgba(255,138,245,0.3)" stroke-width="0.5" fill="none"/></svg></div><h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight glow-text">TRANSMUTE YOUR SHADOW</h1><p class="max-w-xl mx-auto text-gray-400 text-lg leading-relaxed mb-10">Shadow integration meets blockchain. Name the darkness you carry, alchemize it on-chain, and own a permanent, immutable record of your transformation. Your inner work, recorded forever on Sepolia.</p><button id="mainCTA" onclick="beginTransmutation()" class="btn-cyan px-8 py-3.5 rounded-xl text-base font-semibold">Begin Your Transmutation</button>
+<section class="relative flex flex-col items-center justify-center text-center px-4 py-20" style="min-height:60vh;"><div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 50% 40% at 50% 30%,rgba(0,212,255,.06) 0%,transparent 70%);"></div><div class="relative z-10"><div class="mx-auto mb-6" style="width:96px;height:96px;"><svg width="96" height="96" viewBox="0 0 32 32" fill="none"><defs><radialGradient id="hero-bg" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ff8af5"/><stop offset="50%" stop-color="#c255e8"/><stop offset="100%" stop-color="#7b2cbf"/></radialGradient><radialGradient id="hero-sg" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffd700"/><stop offset="100%" stop-color="#b8860b"/></radialGradient></defs><ellipse cx="16" cy="27" rx="8" ry="3" fill="url(#hero-sg)" opacity="0.9"/><rect x="13" y="24" width="6" height="3" rx="1" fill="url(#hero-sg)" opacity="0.8"/><circle cx="16" cy="14" r="10" fill="url(#hero-bg)"/><ellipse cx="13" cy="10" rx="3" ry="2.5" fill="white" opacity="0.35"/><circle cx="19" cy="17" r="1.5" fill="white" opacity="0.2"/></svg></div><h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight glow-text">TRANSMUTE YOUR SHADOW</h1><p class="max-w-xl mx-auto text-gray-400 text-lg leading-relaxed mb-10">Shadow integration meets blockchain. Name the darkness you carry, alchemize it on-chain, and own a permanent, immutable record of your transformation. Your inner work, recorded forever on Sepolia.</p><button id="mainCTA" onclick="beginTransmutation()" class="btn-cyan px-8 py-3.5 rounded-xl text-base font-semibold">Begin Your Transmutation</button>
 <p id="walletHint" style="font-size:11px;color:#6b7280;margin-top:12px;display:none;">Connected: <span id="walletAddr" style="color:#00d4ff;font-family:monospace;"></span></p></div></section>
 <div style="max-width:42rem;margin:24px auto 0;padding:12px 16px;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.15);border-radius:8px;text-align:center;"><p style="font-size:11px;color:#9ca3af;line-height:1.5;"><strong style="color:#00d4ff;">Phase 1: Demonstration Deployment.</strong> Current on-chain activity reflects architect-initiated transactions and content-engine awareness campaign wallets. External organic participation begins Phase 2 (post-formal user study, post-mainnet migration). All transactions are public and verifiable on <a href="https://sepolia.etherscan.io/address/0xE092336F8f5082e57CcBb341A110C20ad186A324" target="_blank" style="color:#00d4ff;">Sepolia Etherscan</a>.</p></div><section class="max-w-4xl mx-auto px-4 py-12"><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><div class="stat-card"><div style="font-size:24px;margin-bottom:4px;"></div><div style="font-size:20px;font-weight:700;color:#00d4ff;">14</div><div style="font-size:11px;color:#6b7280;margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">Demo TXs</div></div><div class="stat-card"><div style="font-size:24px;margin-bottom:4px;">&#x26D3;&#xFE0F;</div><div style="font-size:20px;font-weight:700;color:#00d4ff;">14</div><div style="font-size:11px;color:#6b7280;margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">Sepolia TXs</div></div><div class="stat-card"><div style="font-size:24px;margin-bottom:4px;">&#x1F311;</div><div style="font-size:20px;font-weight:700;color:#00d4ff;">14</div><div style="font-size:11px;color:#6b7280;margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">On-Chain Records</div></div><div class="stat-card"><div style="font-size:24px;margin-bottom:4px;">&#x2728;</div><div style="font-size:20px;font-weight:700;color:#00d4ff;">7</div><div style="font-size:11px;color:#6b7280;margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">Wallets</div></div></div></section>
+
+
+<div id="celebrationOverlay" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;">
+  <div style="text-align:center;max-width:480px;padding:40px;animation:celebrateIn 0.6s ease-out;">
+    <div style="font-size:64px;margin-bottom:16px;">&#x2728;</div>
+    <h2 style="font-size:28px;font-weight:700;margin-bottom:8px;background:linear-gradient(90deg,#00d4ff,#c084fc,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Transmutation Complete</h2>
+    <p style="color:#9ca3af;font-size:14px;line-height:1.6;margin-bottom:24px;">You named your shadow. You recorded it on Ethereum. It cannot be deleted, edited, or denied.<br><br>This is yours forever.</p>
+    <p id="celebWallet" style="font-family:monospace;font-size:12px;color:#00d4ff;margin-bottom:24px;"></p>
+    <button onclick="dismissCelebration()" class="btn-cyan px-8 py-3 rounded-xl text-sm font-semibold">View Your On-Chain Proof</button>
+  </div>
+</div>
+<style>
+@keyframes celebrateIn {
+  0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+</style>
 
 <section id="verifySection" style="display:none;max-width:42rem;margin:32px auto;padding:0 16px;">
   <h2 style="font-size:20px;font-weight:700;text-align:center;margin-bottom:24px;background:linear-gradient(90deg,#00d4ff,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">VERIFY YOUR ON-CHAIN CONTRIBUTION</h2>
@@ -127,7 +183,7 @@ async function beginTransmutation(){
     cta.textContent='Confirming on-chain...';
     var receipt=await tx.wait();
     cta.textContent='Transmutation Complete!';cta.style.background='linear-gradient(135deg,#22c55e,#16a34a)';
-    showVerifySection(receipt.hash);
+    showCelebration(receipt.hash);
   }catch(e){
     console.error(e);cta.textContent='Transmute Your Shadow';cta.disabled=false;
     if(e.code===4001)alert('Transaction cancelled.');
@@ -145,6 +201,19 @@ function showVerifySection(txHash){
   if(hashEl)hashEl.textContent=txHash.slice(0,10)+'...'+txHash.slice(-8);
   if(shareEl)shareEl.textContent='I just transmuted a shadow aspect on AlchemistForge. Verifiable AND anonymous on Ethereum: '+url;
   section.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showCelebration(txHash){
+  var overlay=document.getElementById('celebrationOverlay');
+  var walletEl=document.getElementById('celebWallet');
+  if(overlay){overlay.style.display='flex';}
+  if(walletEl&&wAddr){walletEl.textContent='Wallet: '+fmtAddr(wAddr);}
+  window._pendingTxHash=txHash;
+}
+function dismissCelebration(){
+  var overlay=document.getElementById('celebrationOverlay');
+  if(overlay)overlay.style.display='none';
+  if(window._pendingTxHash)showVerifySection(window._pendingTxHash);
 }
 </script>
 </body>
